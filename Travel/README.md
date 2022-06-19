@@ -18,10 +18,10 @@ https://d2tbtqyd7vkavi.cloudfront.net/
 - S3
 http://my-2565-7004-9826-bucket.s3-website-us-east-1.amazonaws.com/
 
-IAM
+- IAM
 http://my-2565-7004-9826-bucket.s3-website-us-east-1.amazonaws.com/index.html
 
-**  Website Files Screenshots
+**Website Files Screenshots
 
 *** S3 bucket on AWS Management Console
 
