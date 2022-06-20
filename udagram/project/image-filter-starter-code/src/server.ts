@@ -1,7 +1,8 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
-const isImageUrl = require('is-image-url');
+import { nextTick } from 'process';
+
 (async () => {
 
   // Init the Express application
@@ -13,56 +14,28 @@ const isImageUrl = require('is-image-url');
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
 
-  // @TODO1 IMPLEMENT A RESTFUL ENDPOINT
-  // GET /filteredimage?image_url={{URL}}
-  // endpoint to filter an image from a public url.
-  // IT SHOULD
-  //    1
-  //    1. validate the image_url query
-  //    2. call filterImageFromURL(image_url) to filter the image
-  //    3. send the resulting file in the response
-  //    4. deletes any files on the server on finish of the response
-  // QUERY PARAMATERS
-  //    image_url: URL of a publicly accessible image
-  // RETURNS
-  //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
-
-//?image_url={{URL}}
-  app.get( "/filteredimage", async ( req, res ) => {
-    var imgurl = req.query.image_url;
-
-    // 1. validate the image_url query throwing error at line 50 if image is not url
-    if(!imgurl){
-      res.status(422).send("Image url is required")
-    }
-    if(!isImageUrl(imgurl)){
-      res.status(422).send("Please provide url with image")
-    }
-
-
-
-    // 2. call filterImageFromURL(image_url) to filter the image
-    filterImageFromURL(imgurl).then((image)=>{
-      //3. send the resulting file in the response
-      res.status(200).sendFile(image,()=>{
-        deleteLocalFiles([image])
+  app.get( "/filteredimage/", ( req: Request, res: Response ) => {
+    let { image_url } = req.query;
+    if ( !image_url ) {
+      return res.status(400).send("image_url is required");
+    }    
+    filterImageFromURL(image_url)
+      .then(imagePath => {
+        return res.status(200).sendFile(imagePath, err => {
+          if (!err) {
+            let filesList: string[] = [imagePath];
+            deleteLocalFiles(filesList);
+          }
+        });
+      }).catch(() => {
+        return res.status(422).send("error when processing the image");
       });
+  } );  
 
-    }).catch((error) =>{
-      console.log("Error in filterImageFromURL " + error)
-      res.status(500).send("Please check you image URL")
-    })
-    //filterImageFromURL(imgurl)
-    //res.send("try GET /filteredimage?image_url={{}}")
-  });
 
-  /**************************************************************************** */
-
-  //! END @TODO1
-  
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: Request, res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
