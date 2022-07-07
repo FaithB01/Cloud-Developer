@@ -19,6 +19,10 @@
   "bugs": {
     "url": "https://github.com/grutt/udacity-c2-image-filter/issues"
   },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },    
   "homepage": "https://github.com/grutt/udacity-c2-image-filter#readme",
   "devDependencies": {
     "@types/bluebird": "^3.5.33",
