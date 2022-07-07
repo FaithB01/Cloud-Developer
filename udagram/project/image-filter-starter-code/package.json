@@ -13,6 +13,10 @@
     "type": "git",
     "url": "git+https://github.com/grutt/udacity-c2-image-filter.git"
   },
+  "engines":{
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
