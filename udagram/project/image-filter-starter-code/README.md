@@ -10,6 +10,9 @@ A basic Ionic client web application which consumes the RestAPI Backend. [Covere
 2. [The RestAPI Backend](https://github.com/udacity/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi), a Node-Express server which can be deployed to a cloud service. [Covered in the course]
 3. [The Image Filtering Microservice](https://github.com/udacity/cloud-developer/tree/master/course-02/project/image-filter-starter-code), the final project for the course. It is a Node-Express application which runs a simple script to process images. [Your assignment]
 
+### EB_URL
+
+- http://udagramfayb.eba-fjbtuz8a.us-east-1.elasticbeanstalk.com/
 
 ### Github Link
 
@@ -50,7 +53,7 @@ If you're feeling up to it, refactor the course RESTapi to make a request to you
 Prevent requests without valid authentication headers.
 > !!NOTE if you choose to submit this, make sure to add the token to the postman collection and export the postman collection file to your submission so we can review!
 
-## EndPoint
+
 
 udagramfaithdev.cavv5dkzby63.us-east-1.rds.amazonaws.com
 
